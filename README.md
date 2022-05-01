@@ -1,12 +1,16 @@
 # be-media-savvy [TODO]
 
-If media query satisfied, expand template.
 
-If not:
+```html
+<my-vlist be-media-savvy='{
+    "(min-width: 30em) and (max-width: 50em)":{
+        "heightPerRow": "1.5em",
+    }
+}'>
+    <template slot=row>
+        ...
+    </template>
+</my-vlist>
+```
 
-1.  Store state in history.state (?)
-2.  Turn switch is-attributes (back) to be- attributes.
-2.  Archive elements (back) into template
-
-maybe reference archiving code from be-preserved.
- 
+results in setting property myVlist.heightPerRow = "1.5em" when the viewport is between 30em and 50em.
