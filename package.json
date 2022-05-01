@@ -1,16 +1,23 @@
 {
   "name": "be-media-savvy",
   "version": "0.0.0",
-  "description": "",
+  "description": "Set properties of a native or imported custom-element based on media queries.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "node node_modules/may-it-serve",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "trans-render": "0.0.535",
+    "xtal-element": "0.0.491",
+    "be-decorated": "0.0.111",
+    "be-hive": "0.0.43"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/be-media-savvy.git"
   },
-  "author": "",
+  "author": "anderson.bruce.b@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/be-media-savvy/issues"
