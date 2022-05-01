@@ -1,11 +1,31 @@
 {
   "name": "be-media-savvy",
   "version": "0.0.0",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements",
+    "decorate",
+    "behavior",
+    "directive",
+    "media-query"
+  ],
   "description": "Set properties of a native or imported custom-element based on media queries.",
-  "main": "index.js",
+  "main": "be-media-savvy.js",
+  "module": "be-media-savvy.js",
+  "exports":{
+    ".": "./be-media-savvy.js",
+    "./be-media-savvy.js": "be-media-savvy.js"
+  },
+  "files":[
+    "*.*"
+  ],
+  "types": "types.d.ts",
   "scripts": {
     "serve": "node node_modules/may-it-serve",
-    "test": "playwright test"
+    "test": "playwright test",
+    "package-check": "package-check"
   },
   "dependencies": {
     "trans-render": "0.0.535",
