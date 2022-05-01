@@ -5,7 +5,7 @@ import {register} from 'be-hive/register.js';
 export class BeMediaSavvy implements BeMediaSavvyActions{
     #propMqls: MediaQueryList[] = [];
     #propSettings: {[key: string]: any} = {};
-    async onSetProps({setProps}: this): void {
+    async onSetProps({setProps}: this): Promise<void> {
         this.disconnectPropMqls();
         for(const key in setProps){
             const newMql = window.matchMedia(key);
