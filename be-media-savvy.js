@@ -3,6 +3,11 @@ import { register } from 'be-hive/register.js';
 export class BeMediaSavvy {
     #propMqls = [];
     onSetProps({ setProps }) {
+        this.disconnectPropMqls();
+        for (const key in setProps) {
+            const newMql = window.matchMedia(key);
+            newMql.addEventListener('change', this.propMediaQueryHandler);
+        }
     }
     propMediaQueryHandler = (e) => {
     };
@@ -10,6 +15,7 @@ export class BeMediaSavvy {
         for (const mql of this.#propMqls) {
             mql.removeEventListener('change', this.propMediaQueryHandler);
         }
+        this.#propMqls = [];
     }
     finale(proxy, target, beDecorProps) {
         this.disconnectPropMqls();
