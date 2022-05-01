@@ -28,4 +28,4 @@ Set properties of a native or imported custom-element based on media queries.
 
 ... results in setting property myVlist.heightPerRow = "1.5em" when the viewport is between 30em and 50em.
 
-Only setProps is implemented so far.
+Only setProps is implemented so far [TODO].
