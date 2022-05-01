@@ -3,11 +3,18 @@ import { register } from 'be-hive/register.js';
 export class BeMediaSavvy {
     #propMqls = [];
     #propSettings = {};
-    onSetProps({ setProps }) {
+    async onSetProps({ setProps }) {
         this.disconnectPropMqls();
         for (const key in setProps) {
             const newMql = window.matchMedia(key);
-            this.#propSettings[newMql.media] = setProps[key];
+            const propSettings = setProps[key];
+            this.#propSettings[newMql.media] = propSettings;
+            if (newMql.matches) {
+                const { setProp } = await import('trans-render/lib/setProp.js');
+                for (const key in propSettings) {
+                    setProp(this.proxy, key, propSettings[key]);
+                }
+            }
             newMql.addEventListener('change', this.propMediaQueryHandler);
         }
     }
