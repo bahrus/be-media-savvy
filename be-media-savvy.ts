@@ -4,17 +4,23 @@ import {register} from 'be-hive/register.js';
 
 export class BeMediaSavvy implements BeMediaSavvyActions{
     #propMqls: MediaQueryList[] = [];
+    #propSettings: {[key: string]: any} = {};
     onSetProps({setProps}: this): void {
         this.disconnectPropMqls();
         for(const key in setProps){
             const newMql = window.matchMedia(key);
+            this.#propSettings[newMql.media] = setProps[key];
             newMql.addEventListener('change', this.propMediaQueryHandler);
         }
         
     }
 
-    propMediaQueryHandler = (e: MediaQueryListEvent) => {
-        
+    propMediaQueryHandler = async (e: MediaQueryListEvent) => {
+        const propSettings = this.#propSettings[e.media];
+        const {setProp} = await import('trans-render/lib/setProp.js');
+        for(const key in propSettings){
+            setProp(this.proxy, key, propSettings[key]);
+        }
     }
 
     disconnectPropMqls(){
