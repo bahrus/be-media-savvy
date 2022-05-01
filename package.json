@@ -1,6 +1,6 @@
 {
   "name": "be-media-savvy",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "keywords": [
     "web-components",
     "web-component",
@@ -14,11 +14,11 @@
   "description": "Set properties of a native or imported custom-element based on media queries.",
   "main": "be-media-savvy.js",
   "module": "be-media-savvy.js",
-  "exports":{
+  "exports": {
     ".": "./be-media-savvy.js",
     "./be-media-savvy.js": "be-media-savvy.js"
   },
-  "files":[
+  "files": [
     "*.*"
   ],
   "types": "types.d.ts",
