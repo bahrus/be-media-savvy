@@ -9,5 +9,6 @@ export interface BeMediaSavvyProps<TProps = any> extends BeMediaSavvyVirtualProp
 }
 
 export interface BeMediaSavvyActions{
-
+    onSetProps(self: this): void;
+    finale(proxy: Element & BeMediaSavvyVirtualProps, target: Element, beDecorProps: BeDecoratedProps): void;
 }

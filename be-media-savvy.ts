@@ -3,7 +3,24 @@ import {BeMediaSavvyActions, BeMediaSavvyProps, BeMediaSavvyVirtualProps} from '
 import {register} from 'be-hive/register.js';
 
 export class BeMediaSavvy implements BeMediaSavvyActions{
+    #propMqls: MediaQueryList[] = [];
+    onSetProps({setProps}: this): void {
+        
+    }
 
+    propMediaQueryHandler = (e: MediaQueryListEvent) => {
+
+    }
+
+    disconnectPropMqls(){
+        for(const mql of this.#propMqls){
+            mql.removeEventListener('change', this.propMediaQueryHandler);
+        }
+    }
+
+    finale(proxy: Element & BeMediaSavvyVirtualProps, target: Element, beDecorProps: BeDecoratedProps){
+        this.disconnectPropMqls();
+    }
 }
 
 export interface BeMediaSavvy extends BeMediaSavvyProps{}
@@ -20,10 +37,11 @@ define<BeMediaSavvyProps & BeDecoratedProps<BeMediaSavvyProps, BeMediaSavvyActio
         propDefaults:{
             upgrade,
             ifWantsToBe,
-            virtualProps:['setProps']
+            virtualProps:['setProps'],
+            finale: 'finale',
         },
         actions:{
-
+            onSetProps: 'setProps',
         }
     },
     complexPropDefaults:{
