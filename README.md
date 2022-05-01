@@ -10,10 +10,14 @@ Set properties of a native or imported custom-element based on media queries.
         }
     },
     "transformLC": { //light children
-        "spanElements": [{"style": "font-size: 1.5em"}]
+        "(min-width: 10em) and (max-width: 60em)":{
+            "spanElements": [{"title": ["some title"]}]
+        },
     },
     "transformSD":{ //shadow DOM children
-        "spanElements": [{"style": "font-size: 1.5em"}]
+        "(min-width: 10em) and (max-width: 60em)":{
+            "spanElements": [{},{}{"aria-label": "some label"}]
+        }
     }
 }'>
     <template slot=row>
