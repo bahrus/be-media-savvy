@@ -6,13 +6,13 @@ Set properties of a native or imported custom-element based on media queries.
 <my-vlist be-media-savvy='{
     "setProps":{
         "(min-width: 30em) and (max-width: 50em)":{
-          "heightPerRow": "1.5em",
+          "heightPerRow": "1.5em"
         }
     },
     "transformLC": { //light children
         "(min-width: 10em) and (max-width: 60em)":{
             "spanElements": [{"title": ["some title"]}]
-        },
+        }
     },
     "transformSD":{ //shadow DOM children
         "(min-width: 10em) and (max-width: 60em)":{

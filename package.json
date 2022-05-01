@@ -13,6 +13,10 @@
     "be-decorated": "0.0.111",
     "be-hive": "0.0.43"
   },
+  "devDependencies": {
+    "@skypack/package-check": "0.2.2",
+    "may-it-serve": "0.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/be-media-savvy.git"
