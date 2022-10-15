@@ -1,12 +1,13 @@
 import {define, BeDecoratedProps} from 'be-decorated/be-decorated.js';
-import {BeMediaSavvyActions, BeMediaSavvyProps, BeMediaSavvyVirtualProps} from './types';
+import {Actions, PP, Proxy} from './types';
 import {register} from 'be-hive/register.js';
 
-export class BeMediaSavvy implements BeMediaSavvyActions{
-    #propMqls: MediaQueryList[] = [];
+export class BeMediaSavvy implements Actions{
     #propSettings: {[key: string]: any} = {};
-    async onSetProps({setProps}: this): Promise<void> {
-        this.disconnectPropMqls();
+    #mediaQueryControllers: AbortController[] = [];
+    async onSetProps(pp:  PP) {
+        this.disconnect();
+        const {setProps, proxy} = pp;
         for(const key in setProps){
             const newMql = window.matchMedia(key);
             const propSettings = setProps[key];
@@ -14,36 +15,40 @@ export class BeMediaSavvy implements BeMediaSavvyActions{
             if(newMql.matches){
                 const {setProp} = await import('trans-render/lib/setProp.js');
                 for(const key in propSettings){
-                    setProp(this.proxy, key, propSettings[key]);
+                    setProp(proxy, key, propSettings[key]);
                 }
             }
-            newMql.addEventListener('change', this.propMediaQueryHandler);
+            const c = new AbortController();
+            newMql.addEventListener('change', async (e: MediaQueryListEvent) => {
+                this.#propMediaQueryHandler(pp, e);
+            },  {signal: c.signal});
 
         }
         
     }
 
-    propMediaQueryHandler = async (e: MediaQueryListEvent) => {
+    async #propMediaQueryHandler({self}: PP, e: MediaQueryListEvent){
         const propSettings = this.#propSettings[e.media];
         const {setProp} = await import('trans-render/lib/setProp.js');
         for(const key in propSettings){
-            setProp(this.proxy, key, propSettings[key]);
+            setProp(self, key, propSettings[key]);
         }
     }
 
-    disconnectPropMqls(){
-        for(const mql of this.#propMqls){
-            mql.removeEventListener('change', this.propMediaQueryHandler);
+    disconnect(){
+        if(this.#mediaQueryControllers !== undefined){
+            for(const c of this.#mediaQueryControllers){
+                c.abort();
+            }
         }
-        this.#propMqls = [];
+        this.#mediaQueryControllers = [];
     }
 
-    finale(proxy: Element & BeMediaSavvyVirtualProps, target: Element, beDecorProps: BeDecoratedProps){
-        this.disconnectPropMqls();
+    finale(proxy: Proxy, target: Element, beDecorProps: BeDecoratedProps){
+        this.disconnect();
     }
 }
 
-export interface BeMediaSavvy extends BeMediaSavvyProps{}
 
 const tagName = 'be-media-savvy';
 
@@ -51,7 +56,7 @@ const ifWantsToBe = 'media-savvy';
 
 const upgrade = '*';
 
-define<BeMediaSavvyProps & BeDecoratedProps<BeMediaSavvyProps, BeMediaSavvyActions>, BeMediaSavvyActions>({
+define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
     config:{
         tagName,
         propDefaults:{

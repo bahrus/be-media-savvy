@@ -1,14 +1,21 @@
-import {BeDecoratedProps} from 'be-decorated/types';
+import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 
-export interface BeMediaSavvyVirtualProps<TProps = any>{
-    setProps: {[key: string]: Partial<TProps>};
+export interface EndUserProps<TProps = any>{
+    setProps?: {[key: string]: Partial<TProps>};
+}
+export interface VirtualProps<TProps = any> extends EndUserProps<TProps>, MinimalProxy{
+    
 }
 
-export interface BeMediaSavvyProps<TProps = any> extends BeMediaSavvyVirtualProps<TProps>{
-    proxy: Element & BeMediaSavvyVirtualProps;
+export type Proxy = Element & VirtualProps;
+
+export interface ProxyProps<TProps = any> extends VirtualProps<TProps>{
+    proxy: Proxy;
 }
 
-export interface BeMediaSavvyActions{
-    onSetProps(self: this): void;
-    finale(proxy: Element & BeMediaSavvyVirtualProps, target: Element, beDecorProps: BeDecoratedProps): void;
+export type PP = ProxyProps;
+
+export interface Actions{
+    onSetProps(pp: PP): void;
+    finale(proxy: Proxy, target: Element, beDecorProps: BeDecoratedProps): void;
 }

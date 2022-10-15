@@ -28,14 +28,14 @@
     "package-check": "package-check"
   },
   "dependencies": {
-    "trans-render": "0.0.535",
-    "xtal-element": "0.0.491",
-    "be-decorated": "0.0.111",
-    "be-hive": "0.0.43"
+    "trans-render": "0.0.626",
+    "xtal-element": "0.0.530",
+    "be-decorated": "0.0.179",
+    "be-hive": "0.0.74"
   },
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
-    "may-it-serve": "0.0.0"
+    "may-it-serve": "0.0.3"
   },
   "repository": {
     "type": "git",
