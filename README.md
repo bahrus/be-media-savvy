@@ -2,6 +2,18 @@
 
 Set properties of a native or imported custom-element based on media queries.
 
+[![Playwright Tests](https://github.com/bahrus/be-media-savvy/actions/workflows/CI.yml/badge.svg?branch=baseline)](https://github.com/bahrus/be-media-savvy/actions/workflows/CI.yml)
+
+<a href="https://nodei.co/npm/be-media-savvy/"><img src="https://nodei.co/npm/be-media-savvy.png"></a>
+
+Size of package, including custom element behavior framework (be-decorated):
+
+[![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-media-savvy?style=for-the-badge)](https://bundlephobia.com/result?p=be-media-savvy)
+
+Size of new code in this package:
+
+<img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-media-savvy?compression=gzip">
+
 ```html
 <my-vlist be-media-savvy='{
     "setProps":{
